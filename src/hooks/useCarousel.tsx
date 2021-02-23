@@ -5,13 +5,21 @@ interface State {
     offset: number;
     desired: number;
     active: number;
+    length: number;
 }
+
 
 const initialState: State = {
     offset: 0,
     desired: 0,
     active: 0,
+    length: 0
 };
+
+interface buttonActions {
+    next: () => void;
+    previous: () => void
+}
 
 interface nextAction {
     type: 'next'
@@ -46,7 +54,7 @@ const previous = (length: number, current: number): number => {
     return (current - 1 + length) % length;
 }
 
-export const useCarousel = (length: number, interval: number): [SwipeableHandlers, React.CSSProperties] => {
+export const useCarousel = (length: number, interval: number): [SwipeableHandlers, React.CSSProperties, buttonActions] => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const handlers: SwipeableHandlers = useSwipeable({
         onSwipedLeft(event) {
@@ -65,6 +73,23 @@ export const useCarousel = (length: number, interval: number): [SwipeableHandler
         trackTouch: true
     })
 
+    const actions: buttonActions = {
+        next: () => {
+            dispatch({
+                type: 'next',
+                length
+            })
+        },
+        previous: () => {
+            dispatch({
+                type: 'prev',
+                length
+            })
+        }
+    }
+
+
+
     const style: React.CSSProperties = {
         transform: 'translateX(0)',
         width: `${(length + 2) * 100}%`,
@@ -74,12 +99,14 @@ export const useCarousel = (length: number, interval: number): [SwipeableHandler
     }
 
     if (state.desired !== state.active) {
-        style.transform = `translateX(${window.innerWidth}px)`
+        const { desired, active } = state
+        console.log({ desired, active })
+        // style.transform = `translateX(${window.innerWidth}px)`
     }
 
 
 
-    return [handlers, style]
+    return [handlers, style, actions]
 
 
 }

@@ -1,4 +1,4 @@
- export const LandingPage = () => {
+export const LandingPage = () => {
     return (
         <div className="bg-dark-blue h-screen w-screen relative scroll-children z-10">
             <div className="w-full h-screen text-white box-border flex flex-col justify-between pt-0 pb-36 px-6 md:pb-10 md:px-32">
@@ -10,6 +10,5 @@
                 <span className="animate-bounce">↓ scroll</span>
             </div>
         </div>
-        
     )
 }
