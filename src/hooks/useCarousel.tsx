@@ -43,20 +43,15 @@ const reducer = (state: State, action: Actions): State => {
     }
 }
 
-const next = (length: number, current: number): number => {
-    // console.log(`Run next: curr:${current} len: ${length} Value: ${(current + 1 + length) % length}`);
-    return (current + 1) % length;
-}
+const next = (length: number, current: number): number => (current + 1) % length
 
-const previous = (length: number, current: number): number => {
-    // console.log(`Run prev: curr:${current} len: ${length} Value: ${(current - 1 + length) % length}`);
-    return (current - 1 + length) % length;
-}
+const previous = (length: number, current: number): number => (current - 1 + length) % length
+
 
 const transitionTime = 400;
 const smooth = `transform ${transitionTime}ms ease`;
 
-export const useCarousel = (length: number, interval: number): [SwipeableHandlers, React.CSSProperties, buttonActions] => {
+export const useCarousel = (length: number, interval: number): [number, SwipeableHandlers, React.CSSProperties[], buttonActions] => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const handlers: SwipeableHandlers = useSwipeable({
         onSwipedLeft(event) {
@@ -90,7 +85,7 @@ export const useCarousel = (length: number, interval: number): [SwipeableHandler
         }
     }
 
-    const style: React.CSSProperties = {
+    const boxStyle: React.CSSProperties = {
         transform: 'translateX(0)',
         width: `${(length) * 100}%`,
         left: `-${(state.active + 1) * 100}%`,
@@ -98,29 +93,16 @@ export const useCarousel = (length: number, interval: number): [SwipeableHandler
         flexDirection: 'row'
     }
 
-
-    if (state.desired !== state.active) {
-
-        // const distanceBetweenActiveAndDesired = desired > active ? desired - active : active - desired
-        // const directionOfMovement = desired > active ? 1 : -1
-
-
-        state.active = state.desired
-
-        const translateDistance = state.active * (-100 / length)
-        style.transition = smooth;
-        style.transform = `translateX(${translateDistance}%)`;
-
-
-        // console.log({ active, desired, distanceBetweenActiveAndDesired, directionOfMovement, translateDistance });
-
-
-
-
-
+    const itemStyles: React.CSSProperties = {
+        flex: '1 1 0'
     }
 
+    if (state.desired !== state.active) {
+        state.active = state.desired
+        const translateDistance = state.active * (-100 / length)
+        boxStyle.transition = smooth;
+        boxStyle.transform = `translateX(${translateDistance}%)`;
+    }
 
-
-    return [handlers, style, actions]
+    return [state.active, handlers, [boxStyle, itemStyles], actions]
 }
