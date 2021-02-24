@@ -44,12 +44,12 @@ const reducer = (state: State, action: Actions): State => {
 }
 
 const next = (length: number, current: number): number => {
-    console.log(`Run next: curr:${current} len: ${length} Value: ${(current + 1 + length) % length}`);
+    // console.log(`Run next: curr:${current} len: ${length} Value: ${(current + 1 + length) % length}`);
     return (current + 1) % length;
 }
 
 const previous = (length: number, current: number): number => {
-    console.log(`Run prev: curr:${current} len: ${length} Value: ${(current - 1 + length) % length}`);
+    // console.log(`Run prev: curr:${current} len: ${length} Value: ${(current - 1 + length) % length}`);
     return (current - 1 + length) % length;
 }
 
@@ -100,7 +100,23 @@ export const useCarousel = (length: number, interval: number): [SwipeableHandler
 
 
     if (state.desired !== state.active) {
-        console.log('do something');
+
+        // const distanceBetweenActiveAndDesired = desired > active ? desired - active : active - desired
+        // const directionOfMovement = desired > active ? 1 : -1
+
+
+        state.active = state.desired
+
+        const translateDistance = state.active * (-100 / length)
+        style.transition = smooth;
+        style.transform = `translateX(${translateDistance}%)`;
+
+
+        // console.log({ active, desired, distanceBetweenActiveAndDesired, directionOfMovement, translateDistance });
+
+
+
+
 
     }
 

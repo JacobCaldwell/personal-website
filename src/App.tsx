@@ -11,9 +11,9 @@ function App() {
       <LandingPage />
       <ContentSection />
       <Carousel>
-        <div className="w-screen bg-red-300">test1</div>
-        <div className="w-screen bg-green-300">test1</div>
-        <div className="w-screen bg-blue-300">test1</div>
+        <div className="w-screen h-40 bg-red-300">test1</div>
+        <div className="w-screen h-40 bg-green-300">test1</div>
+        <div className="w-screen h-40 bg-blue-300">test1</div>
       </Carousel>
     </div>
   );
