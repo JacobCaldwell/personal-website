@@ -1,45 +1,83 @@
 import React, { useEffect } from 'react'
 import { useCarousel } from "../../hooks/useCarousel";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 type CarouselItemBoxProps = {
-    children?: React.ReactElement | React.ReactElement[]
     style: React.CSSProperties
 }
 
-const Carousel: React.FC = ({ children }) => {
+type CarouselItemProps = {
+    style: React.CSSProperties
+}
 
-    // const length = React.Children.count(children)
+type Props = {
+    items: React.ReactNode[]
+}
 
-    const [handlers, styles, actions] = useCarousel(3, 1)
+type CarouselButtonProps = {
+    onClick: React.MouseEventHandler<HTMLButtonElement> | undefined
+}
+
+
+const buttonWrapper: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'row',
+    fontSize: '2rem',
+    justifyContent: 'space-between',
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
+    position: 'absolute',
+    top: '50%',
+    width: '100%',
+    zIndex: 10,
+}
+
+const Carousel: React.FC<Props> = ({ children, items }) => {
+
+    const [active, handlers, [boxStyle, itemStyle], actions] = useCarousel(items.length, 1)
+
+    const clickNext = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+        event.preventDefault()
+        actions.next()
+    }
+    const clickPrev = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+        event.preventDefault()
+        actions.previous()
+    }
 
     return (
         <Wrapper>
-            <div className="h-56" style={styles} {...handlers}>
-                {children}
+            <div className="outline-none" style={buttonWrapper}>
+                <CarouselButton onClick={clickPrev}>
+                    <FiChevronLeft />
+                </CarouselButton>
+                <CarouselButton onClick={clickNext}>
+                    <FiChevronRight />
+                </CarouselButton>
             </div>
-            <CarouselItemBox style={styles} {...handlers}>
-                <CarouselItem>test1</CarouselItem>
-                <CarouselItem>test2</CarouselItem>
-                <CarouselItem>test3</CarouselItem>
+            <CarouselItemBox style={boxStyle} {...handlers}>
+                {items?.map((item, idx) => {
+                    return <CarouselItem key={idx} style={itemStyle}>{item}</CarouselItem>
+                })}
             </CarouselItemBox>
-            <div className="flex flex-col justify-between">
-                <button className=" top-1/2 " onClick={() => actions.next()}>Next</button>
-                <button className=" top-1/2 " onClick={() => actions.previous()}>Prev</button>
-            </div>
         </Wrapper>
     )
 }
 
-const CarouselItem: React.FC = ({ children }) => {
-    return (<div>{children}</div>)
+const CarouselButton: React.FC<CarouselButtonProps> = ({ children, onClick }) => {
+    return (<button onClick={onClick}>{children}</button>)
+}
+
+const CarouselItem: React.FC<CarouselItemProps> = ({ children, style }) => {
+    return (<div style={style}>{children}</div>)
 }
 
 const CarouselItemBox: React.FC<CarouselItemBoxProps> = ({ children, style }) => {
-    return (<div>{children}</div>)
+    return (<div style={style}>{children}</div>)
 }
 
 const Wrapper: React.FC = ({ children }) => {
-    return (<div>{children}</div>)
+    return (<div className="relative">{children}</div>)
 }
 
 export default Carousel
