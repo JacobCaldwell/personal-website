@@ -5,15 +5,12 @@ interface State {
     offset: number;
     desired: number;
     active: number;
-    length: number;
 }
-
 
 const initialState: State = {
     offset: 0,
     desired: 0,
     active: 0,
-    length: 0
 };
 
 interface buttonActions {
@@ -47,12 +44,17 @@ const reducer = (state: State, action: Actions): State => {
 }
 
 const next = (length: number, current: number): number => {
+    console.log(`Run next: curr:${current} len: ${length} Value: ${(current + 1 + length) % length}`);
     return (current + 1) % length;
 }
 
 const previous = (length: number, current: number): number => {
+    console.log(`Run prev: curr:${current} len: ${length} Value: ${(current - 1 + length) % length}`);
     return (current - 1 + length) % length;
 }
+
+const transitionTime = 400;
+const smooth = `transform ${transitionTime}ms ease`;
 
 export const useCarousel = (length: number, interval: number): [SwipeableHandlers, React.CSSProperties, buttonActions] => {
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -88,25 +90,21 @@ export const useCarousel = (length: number, interval: number): [SwipeableHandler
         }
     }
 
-
-
     const style: React.CSSProperties = {
         transform: 'translateX(0)',
-        width: `${(length + 2) * 100}%`,
+        width: `${(length) * 100}%`,
         left: `-${(state.active + 1) * 100}%`,
         display: 'flex',
         flexDirection: 'row'
     }
 
+
     if (state.desired !== state.active) {
-        const { desired, active } = state
-        console.log({ desired, active })
-        // style.transform = `translateX(${window.innerWidth}px)`
+        console.log('do something');
+
     }
 
 
 
     return [handlers, style, actions]
-
-
 }

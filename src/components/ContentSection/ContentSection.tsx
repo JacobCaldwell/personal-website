@@ -65,7 +65,7 @@ export const ContentSection: React.FC<Props> = ({ children }) => {
                             <h1 className="text-xl md:text-lg text-gray-500 uppercase font-normal">About Me</h1>
                             <p className="text-1xl md:text-2xl font-medium my-6">{`Im a goal-oriented engineer with extensive experience in developing electrical, mechanical and software systems. Im proficient in an assortment of technologies, including `}
                                 {skills.map((element, idx) => {
-                                    return idx === skills.length - 1 ? <span>and<a href={element.link} key={element.id} className={element.class}> {element.name}</a>.</span> : <a href={element.link} key={element.id} className={element.class}>{element.name}, </a>
+                                    return idx === skills.length - 1 ? <span key={element.id}>and<a href={element.link} className={element.class}> {element.name}</a>.</span> : <a href={element.link} key={element.id} className={element.class}>{element.name}, </a>
                                 })}</p>
                             <button className="text-gray-700 px-8 py-2 rounded-full border-gray-500 border hover:bg-gray-100 focus:outline-none">View my resume</button>
                         </div>

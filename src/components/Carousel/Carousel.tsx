@@ -7,21 +7,17 @@ const Carousel: React.FC = ({ children }) => {
 
     const length = React.Children.count(children)
 
-    const [handlers, styles, actions] = useCarousel(length, 1)
-
-    const nextHandler = () => {
-        actions.next()
-    }
-
-    const prevHandler = () => {
-        actions.previous()
-    }
+    const [handlers, styles, actions] = useCarousel(3, 1)
 
     return (
-        <div className="h-screen" style={styles} {...handlers}>
-            {children}
-            <button className="absolute left-0" onClick={() => actions.next()}>Next</button>
-            <button className="absolute left-72" onClick={() => actions.previous()}>Prev</button>
+        <div className='relative'>
+            {/* <div className="h-screen" style={styles} {...handlers}>
+                {children}
+            </div> */}
+            <div className="flex flex-col justify-between">
+                <button className=" top-1/2 " onClick={() => actions.next()}>Next</button>
+                <button className=" top-1/2 " onClick={() => actions.previous()}>Prev</button>
+            </div>
         </div>
     )
 }

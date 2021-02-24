@@ -7,7 +7,7 @@
 }
 
 html {
-    scroll-snap-type: y proximity;
+    /* scroll-snap-type: y proximity; */
     overflow-x: hidden
 }
 
