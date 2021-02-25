@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useCarousel } from "../../hooks/useCarousel";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
@@ -10,7 +10,7 @@ type CarouselItemProps = {
     style: React.CSSProperties
 }
 
-type Props = {
+type CrouselProps = {
     items: React.ReactNode[]
 }
 
@@ -21,7 +21,6 @@ type CarouselButtonProps = {
 type WrapperProps = {
     handlers: any
 }
-
 
 const buttonWrapper: React.CSSProperties = {
     display: 'flex',
@@ -36,12 +35,9 @@ const buttonWrapper: React.CSSProperties = {
     zIndex: 10,
 }
 
-const Carousel: React.FC<Props> = ({ children, items }) => {
+const Carousel: React.FC<CrouselProps> = ({ children, items }) => {
 
     const [active, handlers, [boxStyle, itemStyle], actions] = useCarousel(items.length, 1)
-
-    console.log(active);
-
 
     const clickNext = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
         event.preventDefault()
@@ -88,5 +84,3 @@ const Wrapper: React.FC<WrapperProps> = ({ children, handlers }) => {
 }
 
 export default Carousel
-
-
