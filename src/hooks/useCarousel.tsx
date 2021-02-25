@@ -96,5 +96,10 @@ export const useCarousel = (length: number, interval: number): [number, Swipeabl
         boxStyle.transform = `translateX(${translateDistance}%)`;
     }
 
+    useEffect(() => {
+        const timer = setTimeout(() => dispatch({ type: 'next', length }), 7000)
+        return () => clearTimeout(timer)
+    }, [state.active, state.desired])
+
     return [state.active, handlers, [boxStyle, itemStyles], actions]
 }
