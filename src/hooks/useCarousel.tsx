@@ -1,17 +1,6 @@
 import React, { useEffect, useReducer } from "react";
 import { useSwipeable, SwipeableHandlers } from "react-swipeable";
-interface buttonActions {
-    next: () => void;
-    previous: () => void
-}
-interface nextAction {
-    type: 'next'
-    length: number
-}
-interface prevAction {
-    type: 'prev';
-    length: number;
-}
+
 interface State {
     offset: number;
     desired: number;
@@ -23,6 +12,21 @@ const initialState: State = {
     desired: 0,
     active: 0,
 };
+
+interface buttonActions {
+    next: () => void;
+    previous: () => void
+}
+
+interface nextAction {
+    type: 'next'
+    length: number
+}
+
+interface prevAction {
+    type: 'prev';
+    length: number;
+}
 
 type Actions =
     | nextAction
@@ -78,11 +82,12 @@ export const useCarousel = (length: number, interval: number): [number, Swipeabl
     }
 
     const boxStyle: React.CSSProperties = {
-        transform: 'translateX(0)',
+        transform: `translateX(0%)`,
         width: `${(length) * 100}%`,
         left: `-${(state.active + 1) * 100}%`,
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        transition: 'transform 500ms ease'
     }
 
     const itemStyles: React.CSSProperties = {
@@ -91,15 +96,14 @@ export const useCarousel = (length: number, interval: number): [number, Swipeabl
 
     if (state.desired !== state.active) {
         state.active = state.desired
-        const translateDistance = state.active * (-100 / length)
-        boxStyle.transition = `transform 400ms ease-in-out`;
-        boxStyle.transform = `translateX(${translateDistance}%)`;
+        const dist = state.active * (-100 / length)
+        boxStyle.transform = `translateX(${dist}%)`;
     }
 
     useEffect(() => {
-        const timer = setTimeout(() => dispatch({ type: 'next', length }), 7000)
-        return () => clearTimeout(timer)
-    }, [state.active, state.desired])
+        const timeout = setTimeout(() => dispatch({ type: 'next', length }), 7000);
+        return () => clearTimeout(timeout);
+    }, [state.offset, state.active]);
 
     return [state.active, handlers, [boxStyle, itemStyles], actions]
 }
