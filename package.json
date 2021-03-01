@@ -19,9 +19,13 @@
     "react-icons": "^4.2.0",
     "react-scripts": "4.0.2",
     "react-swipeable": "^6.0.1",
+    "styled-components": "^5.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
+  },
+  "resolutions": {
+    "styled-components": "^5"
   },
   "scripts": {
     "start": "craco start",
@@ -46,5 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.7"
   }
 }

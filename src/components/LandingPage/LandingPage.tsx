@@ -1,14 +1,107 @@
+import styled, { keyframes } from "styled-components";
+
+const slidein = keyframes`
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+`
+const opacity = keyframes`
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+`
+
+const Content = styled.div`
+    color: rgba(255, 255, 255, var(--tw-text-opacity));
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between; 
+    padding: 0rem 1.5rem 9rem 1.5rem;
+    width: 100%;
+    --tw-text-opacity: 1;
+
+    @media (min-width: 768px) {
+        padding-bottom: 2.5rem;
+        padding-left: 8rem;
+        padding-right: 8rem;
+    }
+`
+const Header = styled.h1`
+    animation-name: ${slidein};
+    animation-duration: 1000ms;
+    animation-delay: 150ms;
+    color: rgba(107, 114, 128, var(--tw-text-opacity));
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.75rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    --tw-text-opacity: 1;
+    
+    @media (min-width: 768px) {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+    }
+`
+const Subheader = styled.h2`
+    animation-name: ${opacity};
+    animation-duration: 2000ms;
+    animation-delay: 150ms;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+    padding-bottom: 1rem;
+
+    @media (min-width: 768px) {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+    }
+
+`
+const TextBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    margin-top: 3rem;
+`
+const Wrapper = styled.div`
+    background-color: #00071c;
+    height: 100vh;
+    position: relative;
+    scroll-snap-align: start;
+    width: 100vw;
+    z-index: 10;
+`
+const Link = styled.a`
+    :hover {
+        color: ${props => props.color || 'rgba(16, 185, 129, var(--tw-text-opacity))'};
+        transition: color ease-in-out 150ms; 
+        --tw-text-opacity: 1;
+    }
+`
+
 export const LandingPage = () => {
     return (
-        <div className="bg-dark-blue h-screen w-screen relative scroll-children z-10">
-            <div className="w-full h-screen text-white box-border flex flex-col justify-between pt-0 pb-36 px-6 md:pb-10 md:px-32">
-                <div className="h-full flex flex-col mt-12 justify-center ">
-                    <h1 className="text-xl md:text-lg text-gray-500 uppercase mb-6 font-normal animate-fade-in delay-300">Jacob Caldwell</h1>
-                    <h2 className="text-3xl md:text-4xl font-bold pb-4 animate-slide-in delay-100">Product Development Engineer from Memphis, TN</h2>
-                    <h2 className="text-3xl md:text-4xl font-bold pb-4 animate-slide-in delay-100">Currently @ <a className="hover:text-green-500" href="https://abb.com">ABB</a></h2>
-                </div>
+        <Wrapper>
+            <Content>
+                <TextBox>
+                    <Header>Jacob Caldwell</Header>
+                    <Subheader>Product Development Engineer from Memphis, TN</Subheader>
+                    <Subheader>Currently @ <Link href="https://abb.com">ABB</Link></Subheader>
+                </TextBox>
                 <span className="animate-bounce">↓ scroll</span>
-            </div>
-        </div>
+            </Content>
+        </Wrapper>
     )
 }

@@ -101,7 +101,7 @@ export const useCarousel = (length: number, interval: number): [number, Swipeabl
     }
 
     useEffect(() => {
-        const timeout = setTimeout(() => dispatch({ type: 'next', length }), 7000);
+        const timeout = setTimeout(() => dispatch({ type: 'next', length }), 10000);
         return () => clearTimeout(timeout);
     }, [state.offset, state.active]);
 

@@ -3,7 +3,6 @@ import { Section } from '../Section/Section'
 import image from "../../content/images/me.jpg";
 import resume from "../../content/documents/Resume.pdf";
 import Carousel from '../Carousel/Carousel';
-import { ImGithub, ImLinkedin } from "react-icons/im";
 import { IoMail, IoLogoGithub, IoLogoLinkedin } from "react-icons/io5";
 
 type Props = {
@@ -34,6 +33,27 @@ const skills = [
         name: "MS Test",
         link: "https://reactjs.org",
         class: 'hover:text-purple-500 transition-color duration-150'
+    }]
+
+const socials = [
+    {
+        id: 1,
+        name: 'Send me an email',
+        href: 'mailto:jacobscaldwell1@gmail.com',
+        icon: <IoMail className="mr-3" />
+    },
+    {
+        id: 2,
+        name: 'LinkedIn',
+        href: 'https://www.linkedin.com/in/caldwelljacob/',
+        icon: <IoLogoLinkedin className="mr-3" />
+    },
+    {
+        id: 3,
+        name: 'GitHub',
+        href: 'https://github.com/JacobCaldwell',
+        icon: <IoLogoGithub className="mr-3" />
+
     }]
 
 export const ContentSection: React.FC<Props> = ({ children }) => {
@@ -69,15 +89,11 @@ export const ContentSection: React.FC<Props> = ({ children }) => {
                                     </div>
                                     <hr className="w-0.5 h-auto mx-7 bg-gray-200" />
                                     <div className="flex flex-col">
-                                        <button className="z-20 my-2 text-gray-700 px-6 overflow-hidden py-2 rounded-full border-gray-500 border hover:bg-gray-100 focus:outline-none">
-                                            <a className="whitespace-nowrap flex flex-row items-center" href="#"><IoMail className="mr-3" />Send me an email</a>
-                                        </button>
-                                        <button className="z-20 my-2 text-gray-700 px-6 overflow-hidden py-2 rounded-full border-gray-500 border hover:bg-gray-100 focus:outline-none">
-                                            <a className="whitespace-nowrap flex flex-row items-center" href="#"><IoLogoLinkedin className="mr-3" />LinkedIn</a>
-                                        </button>
-                                        <button className="z-20 my-2 text-gray-700 px-6 overflow-hidden py-2 rounded-full border-gray-500 border hover:bg-gray-100 focus:outline-none">
-                                            <a className="whitespace-nowrap flex flex-row items-center" href="#"><IoLogoGithub className="mr-3" />Github</a>
-                                        </button>
+                                        {socials.map((item) => (
+                                            <button key={item.id} className="z-20 my-2 text-gray-700 px-6 overflow-hidden py-2 rounded-full border-gray-500 border hover:bg-gray-100 focus:outline-none">
+                                                <a className="whitespace-nowrap flex flex-row items-center" href={item.href}>{item.icon}{item.name}</a>
+                                            </button>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
