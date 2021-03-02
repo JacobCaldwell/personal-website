@@ -80,7 +80,7 @@ const CarouselItemBox: React.FC<CarouselItemBoxProps> = ({ children, style }) =>
 }
 
 const Wrapper: React.FC<WrapperProps> = ({ children, handlers }) => {
-    return (<div className="relative" {...handlers}>{children}</div>)
+    return (<div className="relative border-b-2" {...handlers}>{children}</div>)
 }
 
 export default Carousel

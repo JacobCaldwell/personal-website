@@ -4,6 +4,10 @@ import image from "../../content/images/me.jpg";
 import resume from "../../content/documents/Resume.pdf";
 import Carousel from '../Carousel/Carousel';
 import { IoMail, IoLogoGithub, IoLogoLinkedin } from "react-icons/io5";
+import react from "../../content/images/react.png";
+import firebase from "../../content/images/firebase.png";
+import typescript from "../../content/images/ts.png";
+import tailwind from "../../content/images/tailwind.png";
 
 type Props = {
     children?: React.ReactNode
@@ -101,6 +105,17 @@ export const ContentSection: React.FC<Props> = ({ children }) => {
                     </Section>,
                 ]}>
             </Carousel>
+            <Section classes="w-auto py-32 flex flex-col justify-center items-center px-16 md:px-32">
+                <h1 className="text-xl md:text-lg text-gray-500 uppercase font-normal">About this site</h1>
+                <p className="text-1xl md:text-2xl font-medium my-3 text-center">This website was designed and code by myself using the following technologies:</p>
+                <div className="flex flex-col md:flex-row items-center justify-between pt-2">
+                    <img className="h-20 px-6 mt-8" src={react} alt="" />
+                    <img className="h-20 px-6 mt-8" src={firebase} alt="" />
+                    <img className="h-20 px-6 mt-8" src={typescript} alt="" />
+                    <img className="h-20 px-6 mt-8" src={tailwind} alt="" />
+                </div>
+
+            </Section>
         </div>
     )
 }
