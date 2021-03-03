@@ -1,7 +1,7 @@
 import React from 'react'
 import { Section } from '../Section/Section'
 import image from "../../content/images/me.jpg";
-import resume from "../../content/documents/Resume.pdf";
+import resume from "../../content/documents/Jacob Caldwell - Resume.pdf";
 import Carousel from '../Carousel/Carousel';
 import { IoMail, IoLogoGithub, IoLogoLinkedin } from "react-icons/io5";
 import react from "../../content/images/react.png";
