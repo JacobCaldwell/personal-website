@@ -34,10 +34,17 @@ const skills = [
     },
     {
         id: 4,
-        name: "MS Test",
-        link: "https://reactjs.org",
+        name: "Python",
+        link: "https://python.org",
         class: 'hover:text-purple-500 transition-color duration-150'
-    }]
+    },
+    {
+        id: 5,
+        name: "Java",
+        link: "https://java.com",
+        class: 'hover:text-red-500 transition-color duration-150'
+    }
+]
 
 const socials = [
     {
@@ -72,7 +79,7 @@ export const ContentSection: React.FC<Props> = ({ children }) => {
                                 <img alt="me" className=" w-52 rounded-2xl md:mr-10" src={image}></img>
                                 <div className="max-w-3xl mt-5 md:mt-0 text-center md:text-left">
                                     <h1 className="text-xl md:text-lg text-gray-500 uppercase font-normal">About Me</h1>
-                                    <p className="text-1xl md:text-2xl font-medium my-6">{`Im a goal-oriented engineer with extensive experience in developing electrical, mechanical and software systems. Im proficient in an assortment of technologies, including `}
+                                    <p className="text-1xl md:text-2xl font-medium my-6">{`I'm a goal-oriented engineer with extensive experience in developing electrical, mechanical and software systems. I'm proficient in an assortment of technologies including `}
                                         {skills.map((element, idx) => {
                                             return idx === skills.length - 1 ? <span key={element.id}>and<a href={element.link} className={element.class}> {element.name}</a>.</span> : <a href={element.link} key={element.id} className={element.class}>{element.name}, </a>
                                         })}</p>
@@ -107,7 +114,7 @@ export const ContentSection: React.FC<Props> = ({ children }) => {
             </Carousel>
             <Section classes="w-auto py-32 flex flex-col justify-center items-center px-16 md:px-32">
                 <h1 className="text-xl md:text-lg text-gray-500 uppercase font-normal">About this site</h1>
-                <p className="text-1xl md:text-2xl font-medium my-3 text-center">This website was designed and code by myself using the following technologies:</p>
+                <p className="text-1xl md:text-2xl font-medium my-3 text-center">This website was designed and coded by myself using the following technologies:</p>
                 <div className="flex flex-col md:flex-row items-center justify-between pt-2">
                     <img className="h-20 px-6 mt-8" src={react} alt="" />
                     <img className="h-20 px-6 mt-8" src={firebase} alt="" />
